@@ -13,3 +13,5 @@
 .brand .university-logo{display:block;flex:none;width:clamp(58px,6.7vh,76px);height:clamp(58px,6.7vh,76px);object-fit:contain;border-radius:50%;background:#fff}
 .brand-copy{min-width:0;display:flex;flex-direction:column;gap:4px}.university-name{font-size:clamp(13px,.95vw,19px);color:#b9c9e1;letter-spacing:2px}.brand-copy h1{line-height:1.2}
 @media(max-width:650px){.brand .university-logo{width:48px;height:48px}.university-name{font-size:11px;letter-spacing:1px}.brand-copy{gap:3px}.brand-copy h1{font-size:18px}}
+
+.nav-actions button:disabled{opacity:.35;cursor:default;background:transparent}
