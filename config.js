@@ -1,0 +1,1 @@
+window.BOARD_CONFIG = {"mode": "public", "dataUrl": "https://raw.githubusercontent.com/ChenLingHan/nuist-acm-member-training-database/main/data/dashboard.json", "repositoryUrl": "https://github.com/ChenLingHan/nuist-acm-member-training-database"};
