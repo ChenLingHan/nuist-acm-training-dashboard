@@ -9,7 +9,7 @@
     const members = data.members.map(m=> {
       const records = solves.filter(s=>s.member_id===m.id);
       const accounts=data.accounts.filter(a=>a.member_id===m.id);
-      const counts=Object.fromEntries(platforms.map(p=>{const a=accounts.find(a=>a.platform===p);return [p,a?.inventory_total??records.filter(s=>s.platform===p).length];}));
+      const counts=Object.fromEntries(platforms.map(p=>{const a=accounts.find(a=>a.platform===p),known=records.filter(s=>s.platform===p).length;return [p,Math.max(a?.inventory_total??0,known)];}));
       const week=records.filter(s=>s.solved_at!==null && s.solved_at>=start && s.solved_at<=now);
       return {...m, accounts, total:platforms.reduce((sum,p)=>sum+counts[p],0), collected:records.length,
         total_partial:accounts.some(a=>a.inventory_total==null&&!a.complete),
@@ -23,7 +23,7 @@
       const day=start+i*86400;
       return {date:new Date((day+28800)*1000).toISOString().slice(5,10).replace('-','.'),count:solves.filter(s=>s.solved_at!==null && s.solved_at>=day && s.solved_at<day+86400 && s.solved_at<=now).length};
     });
-    return {...data, members, total:solves.length, weekly:trend.reduce((n,r)=>n+r.count,0), trend,
+    return {...data, members, total:members.reduce((n,m)=>n+m.total,0), weekly:trend.reduce((n,r)=>n+r.count,0), trend,
       unknown_dates:solves.filter(s=>s.solved_at===null).length, now, week_start:start, events:[], recent:[]};
   }
   const api={toState}; root.BoardData=api;
